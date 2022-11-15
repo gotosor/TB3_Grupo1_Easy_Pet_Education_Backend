@@ -9,7 +9,7 @@ import com.proyecto.mascotas.entidades.Mascota;
 import com.proyecto.mascotas.repository.MascotaRepository;
 
 @Service
-public class MascotaServiceImpl implements MascotaService{
+public class MascotaServiceImpl implements MascotaService {
 
     @Autowired
     private MascotaRepository mascotaRepository;
@@ -21,20 +21,20 @@ public class MascotaServiceImpl implements MascotaService{
     }
 
     @Override
-    public Mascota encontrarMascota(String nombre) {
-        
-        return mascotaRepository.findByNombre(nombre);
+    public Mascota encontrarMascota(long id) {
+
+        return mascotaRepository.findById(id);
     }
 
     @Override
     public void eliminarMascota(Long id) {
         mascotaRepository.deleteById(id);
-        
+
     }
 
     @Override
-    public Mascota modificarMascota(String nombre, Mascota mascota) {
-        Mascota mascotalocal = encontrarMascota(nombre);
+    public Mascota modificarMascota(long id, Mascota mascota) {
+        Mascota mascotalocal = encontrarMascota(id);
         mascotalocal.setNombre(mascota.getNombre());
         mascotalocal.setCarpeta(mascota.getCarpeta());
         mascotalocal.setImagenCmb(mascota.getImagenCmb());
@@ -49,12 +49,12 @@ public class MascotaServiceImpl implements MascotaService{
         mascotalocal.setVideoIzq(mascota.getVideoIzq());
         mascotalocal.setVideoCent(mascota.getVideoCent());
         mascotalocal.setVideoDere(mascota.getVideoDere());
-        return mascotaRepository.save(mascotalocal);    
+        return mascotaRepository.save(mascotalocal);
     }
 
     @Override
     public List<Mascota> lMascotas() {
         return mascotaRepository.findAll();
     }
-    
+
 }
